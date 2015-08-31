@@ -5,7 +5,7 @@ var express = require('express'),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
 	nicknames = [];
-app.use(express.static(__dirname+'/fbChat/images'));
+app.use("/images",express.static(__dirname+'/images'));
 server.listen(3010);
 app.get('/', function(req, res){
 	res.sendFile(__dirname + '/index.html');
