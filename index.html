@@ -3,40 +3,146 @@
 <html>
 <head>
 	<title>Chat with socket.io and node.js</title>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700'
+ rel='stylesheet' type='text/css'>
+ <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 	<style>
 		#chat{
 			height:500px;
+			width: 410px;
+			background-color: white;
+			border-color: transparent;
+			padding: 10px;
 		}
 		#contentWrap{
 			display: none;
 		}
 		#chatWrap{
 			float: left;
-			border: 1px #000 solid;
 		}
+		#nickWrap{
+			border-radius: 2px;
+			background-color: #F7F7F7;
+			border-radius: 2px;
+			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			padding:40px;
+			width: 450px;
+			position: absolute;
+			left:35%;
+			height:400px;	
+		}
+		#contentWrap{
+			border-radius: 2px;
+			border-color: transparent;
+			background-color: #F7F7F7;
+			border-radius: 2px;
+			box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+			padding:20px;
+			width: 450px;
+			position: absolute;
+			left:35%;
+			height:600px;	
+		}
+		body{
+			padding: 20px;
+ 			font-family: 'Open Sans', sans-serif;
+ 			color:#404040;
+
+		}
+		#loginmain{
+			text-align: center;
+			color:#404040;
+			font-size: 14px;
+		}
+		.btn {
+		    padding: 7px 15px;
+		    border: 0 none;
+		    font-weight: 700;
+		    letter-spacing: 1px;
+		    text-transform: uppercase;
+		    background: #75F740	
+
+		}
+		.btn:hover{
+					    background: #3FB206;
+
+		}
+		 
+		.btn:focus, .btn:active:focus, .btn.active:focus {
+		    outline: 0 none;
+		}
+		 
+		.btn-primary {
+		    color: #ffffff;
+		    background: #75F740	
+		}
+		 
+		.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
+		    background: #3FB206;
+		}
+		 
+		.btn-primary:active, .btn-primary.active {
+			background: #75F740		    
+			box-shadow: none;
+		}
+
 	</style>
 </head>
 <body>
+	<div id="loginmain">
+	<center>
+	<img src="http://localhost:3010/images/emerald.png" width="150px"><br>
+	<img src="http://localhost:3010/images/emeraldchat.png" width="300px"></center>
+
+</center>
+<br>
 	<div id="nickWrap">
-		<p>Enter a username:</p>
+
+
+		<center>
+		<img src="http://localhost:3010/images/user.png" width="150px"></center>
+
 		<p id="nickError"></p>
 		<form id="setNick">
-			<input size="35" id="nickname"></input>
-			<input type="submit"></input>
+			 <input type="text" id="nickname" class="form-control" placeholder="Enter your username" required autofocus><br>
+			<button class="btn btn-lg btn-primary btn-block" type="submit" style="  ">
+                    Sign in</button>
 		</form>
 	</div>
+	</div>
+
 
 	<div id="contentWrap">
 		<div id="chatWrap">
 			<div id="chat"></div>
 			<form id="send-message">
-				<input size="35" id="message"></input>
-				<input type="submit"></input>
+				<div class="form-group">
+					 
+		            <div class="input-group" style="width:100%">
+				      <input type="text" class="form-control"  id="message"  placeholder="Enter message here" required autofocus>
+				      <span class="input-group-btn">
+				        <button class="btn btn-default btn-primary" type="submit"> > </button>
+				      </span>
+				    </div>
+                </div>
 			</form>
 		</div>
-		<div id="users"></div>
+
+
+
 	</div>
-	
+	<h3>Online Users:
+	<div id="users">
+			
+	</div>
+	<br>	
 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
 	<script>
@@ -80,6 +186,10 @@
 			socket.on('new message', function(data){
 				$chat.append('<b>' + data.nick + ': </b>' + data.msg + "<br/>");
 			});
+
+		
+				$chat.append("Welcome to Emerald Chat"+"<br/>");
+		
 		});
 	</script>
 </body>
