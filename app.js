@@ -5,11 +5,10 @@ var express = require('express'),
 	server = require('http').createServer(app),
 	io = require('socket.io').listen(server),
 	nicknames = [];
-	
-server.listen(3000);
-
+app.use(express.static(__dirname+'/fbChat/images'));
+server.listen(3010);
 app.get('/', function(req, res){
-	res.sendfile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/index.html');
 });
 
 io.sockets.on('connection', function(socket){
